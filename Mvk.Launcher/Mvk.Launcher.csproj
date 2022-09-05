@@ -12,6 +12,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <PackageReference Include="SharpCompress" Version="0.32.2" />
+	</ItemGroup>
+
+	<ItemGroup>
 	  <Page Include="App.xaml" />
 	</ItemGroup>
 

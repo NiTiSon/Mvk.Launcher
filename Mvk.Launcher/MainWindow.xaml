@@ -68,7 +68,20 @@
 
                     <!-- Picture or sth other??? -->
 
-                    <Grid Grid.Row="1" Background="#FF3F3F3F"/>
+                    <Grid Grid.Row="1" Background="#FF3F3F3F">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*" />
+                            <RowDefinition Height="6*" />
+                            <RowDefinition Height="1*" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="30*"/>
+                            <ColumnDefinition Width="30*"/>
+                            <ColumnDefinition Width="30*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Button Click="PlayButtonClicked" Margin="5" Grid.Column="1" Grid.Row="1" AutomationProperties.Name="playButton"/>
+                    </Grid>
 
                 </Grid>
             </Grid>

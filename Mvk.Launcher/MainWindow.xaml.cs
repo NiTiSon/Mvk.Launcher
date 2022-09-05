@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Mvk.Launcher;
+using System;
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
@@ -40,5 +41,9 @@ public partial class MainWindow : Window
 		process.StartInfo.ArgumentList.Add("https://github.com/NiTiS-Dev");
 
 		process.Start();
+	}
+	public void PlayButtonClicked(object sender, RoutedEventArgs e)
+	{
+		LauncherCore.ShowError("Version not selected");
 	}
 }
