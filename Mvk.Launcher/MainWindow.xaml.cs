@@ -1,4 +1,5 @@
 ﻿using Mvk.Launcher;
+using Mvk.Launcher.GameAdapter;
 using System;
 using System.Diagnostics;
 using System.Windows;
@@ -25,7 +26,15 @@ public partial class MainWindow : Window
 
 	private void VersionsUpdated()
 	{
+		this.versionBox.Items.Clear();
+		this.versionBox.IsEnabled = true;
 
+		foreach (MvkVersion version in LauncherCore.GameVersions)
+		{
+			MvkComboBoxItem comboBoxItem = new(version.Version.ToString(), version.DownloadURI);
+
+			this.versionBox.Items.Add(comboBoxItem);
+		}
 	}
 	protected override void OnClosed(EventArgs e)
 	{

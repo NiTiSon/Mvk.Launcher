@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Mkv.Launcher"
+        xmlns:local="clr-namespace:Mkv.Launcher" xmlns:launcher="clr-namespace:Mvk.Launcher"
         mc:Ignorable="d"
         WindowStyle="None" AllowsTransparency="True"
         Background="Transparent"
@@ -276,7 +276,7 @@
                         </Grid.ColumnDefinitions>
 
                         <ComboBox x:Name="versionBox" Loaded="VersionSelectLoaded" Grid.Row="1" Grid.Column="0" Margin="10" HorizontalAlignment="Left" VerticalAlignment="Center" AutomationProperties.Name="versionSelectBox">
-                            <ComboBoxItem Content="Loading..." IsEnabled="false" IsSelected="true"></ComboBoxItem>
+                            <ComboBoxItem x:Name="loadingItem" Content="Loading..." IsEnabled="false" IsSelected="true"></ComboBoxItem>
                         </ComboBox>
 
                         <Button x:Name="playButton" Click="PlayButtonClicked" Margin="5" Grid.Column="1" Grid.Row="1" AutomationProperties.Name="playButton" Foreground="#FFF3F3F3" Content="Download" FontFamily="Cascadia Code" FontSize="28"/>

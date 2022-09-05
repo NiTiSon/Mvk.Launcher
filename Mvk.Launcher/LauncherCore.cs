@@ -89,6 +89,7 @@ public static class LauncherCore
 		string versions = await client.GetStringAsync(VersionsURI);
 
 		GameVersions.Clear();
+		uint i = 0;
 		foreach (string line in versions.Split(new char[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries))
 		{
 			if (line.StartsWith('!'))
@@ -99,6 +100,8 @@ public static class LauncherCore
 
 			string versionName = line.Substring(0, hash);
 			string uri = semi is -1 ? line[(hash+1)..(line.Length-1)] : line[(hash+1)..semi];
+
+			GameVersions.Add(new(Version.Parse(versionName), i++, uri));
 		}
 
 		OnVersionsRefreshed();
