@@ -13,9 +13,36 @@ public partial class MainWindow : Window
 {
 	public MainWindow()
 	{
+		Closed += (o, e) => { LauncherCore.SaveOptions(); };
+
+		LauncherCore.OnVersionsRefreshed += VersionsUpdated;
+		LauncherCore.OnOptionsLoaded += OptionsLoaded;
+
 		InitializeComponent();
-		//this.versionLabel.Content = $"Version: {LauncherCore.ApplicationVersion}";
+		LauncherCore.LoadVersions();
+		LauncherCore.LoadOptions();
 	}
+
+	private void VersionsUpdated()
+	{
+
+	}
+	protected override void OnClosed(EventArgs e)
+	{
+		base.OnClosed(e);
+
+		this.optionPlayerName.TextChanged -= UpdateName;
+	}
+	private void OptionsLoaded()
+	{
+		this.optionPlayerName.Text = LauncherCore.Options.PlayerName;
+		this.optionPlayerName.TextChanged += UpdateName;
+	}
+	private void UpdateName(object sender, TextChangedEventArgs e)
+	{
+		LauncherCore.Options.PlayerName = String.IsNullOrWhiteSpace(this.optionPlayerName.Text) ? "Player" : this.optionPlayerName.Text;
+	}
+
 	public void DragWindow(object sender, MouseButtonEventArgs args)
 	{
 		DragMove();
@@ -25,7 +52,7 @@ public partial class MainWindow : Window
 		this.Close();
 	}
 
-	private void VersionNameLoad(object sender, RoutedEventArgs e)
+	public void VersionNameLoad(object sender, RoutedEventArgs e)
 	{
 		if (sender is TextBlock tb)
 		{
@@ -33,17 +60,12 @@ public partial class MainWindow : Window
 		}
 	}
 	public void NiTiSLinkClick(object sender, EventArgs args)
-	{
-		using Process process = new();
-		process.StartInfo.FileName = "explorer.exe";
-		process.StartInfo.UseShellExecute = false;
-		process.StartInfo.CreateNoWindow = true;
-		process.StartInfo.ArgumentList.Add("https://github.com/NiTiS-Dev");
-
-		process.Start();
-	}
+		=> LauncherCore.OpenBrowser("https://github.com/NiTiS-Dev");
 	public void PlayButtonClicked(object sender, RoutedEventArgs e)
 	{
 		LauncherCore.ShowError("Version not selected");
+	}
+	public void VersionSelectLoaded(object sender, RoutedEventArgs e)
+	{
 	}
 }
