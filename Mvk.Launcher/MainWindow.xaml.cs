@@ -9,6 +9,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -136,8 +137,6 @@ public partial class MainWindow : Window
 
 				using RarArchive archive = RarArchive.Open(tempRar);
 
-				LauncherCore.ShowError(archive.IsComplete.ToString());
-
 				string versionDirectory = Path.Combine(LauncherCore.VersionsDirectory, version.Version.ToString(4));
 
 				if (!Directory.Exists(versionDirectory))
@@ -151,12 +150,34 @@ public partial class MainWindow : Window
 						ExtractFullPath = true,
 					});
 				}
+
+				File.Delete(tempRar);
 			}
 
-			if (!File.Exists(Path.Combine(instance.SaveLocation, "options.ini")))
+			string optionsFile = Path.Combine(instance.SaveLocation, "options.ini");
+			if (!File.Exists(optionsFile))
 			{
 				using StreamWriter sw = File.CreateText(Path.Combine(instance.SaveLocation, "options.ini"));
 				sw.WriteLine($"Nickname: {LauncherCore.Options.PlayerName}");
+			}
+			else
+			{
+				StringBuilder sb = new();
+				string allText = File.ReadAllText(optionsFile);
+
+				foreach (string line in allText.Split(new char[] { '\n', '\r' }))
+				{
+					if (line.StartsWith("Nickname:"))
+					{
+						sb.AppendLine("Nickname: " + LauncherCore.Options.PlayerName);
+					}else
+					{
+						if (line.Length > 0 && !Char.IsWhiteSpace(line[0]))
+							sb.AppendLine(line);
+					}
+				}
+
+				File.WriteAllText(optionsFile, sb.ToString());
 			}
 
 			gameLaunch.EnableRaisingEvents = true;
