@@ -7,6 +7,7 @@
         mc:Ignorable="d"
         WindowStyle="None" AllowsTransparency="True"
         Background="Transparent"
+        ResizeMode="NoResize"
         Title="Mvk Launcher" Height="450" Width="800">
     <Window.Resources>
         <LinearGradientBrush x:Key="WindowFrameBrush" StartPoint="1,1" EndPoint="0,0">
@@ -43,7 +44,7 @@
         </Style>
 
         <!--#endregion-->
-        
+
         <ControlTemplate x:Key="ComboBoxToggleButton" TargetType="{x:Type ToggleButton}">
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -275,11 +276,16 @@
                             <ColumnDefinition Width="30*"/>
                         </Grid.ColumnDefinitions>
 
-                        <ComboBox x:Name="versionBox" Loaded="VersionSelectLoaded" Grid.Row="1" Grid.Column="0" Margin="10" HorizontalAlignment="Left" VerticalAlignment="Center" AutomationProperties.Name="versionSelectBox">
-                            <ComboBoxItem x:Name="loadingItem" Content="Loading..." IsEnabled="false" IsSelected="true"></ComboBoxItem>
-                        </ComboBox>
 
-                        <Button x:Name="playButton" Click="PlayButtonClicked" Margin="5" Grid.Column="1" Grid.Row="1" AutomationProperties.Name="playButton" Foreground="#FFF3F3F3" Content="Download" FontFamily="Cascadia Code" FontSize="28"/>
+                        <DockPanel HorizontalAlignment="Center" Grid.Row="1" Grid.Column="0">
+                            <ComboBox x:Name="versionBox" Margin="10" HorizontalAlignment="Left" VerticalAlignment="Center" AutomationProperties.Name="versionSelectBox" SelectionChanged="GameInstanceSelected">
+                                <ComboBoxItem x:Name="loadingItem" Content="Loading..." IsEnabled="false" IsSelected="true"></ComboBoxItem>
+                            </ComboBox>
+                            <Button IsEnabled="False" x:Name="newGameInstanceButton" Width="25" Height="25" Background="{x:Null}" Content="+" FontSize="22" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Cascadia Code" Click="NewInstance" />
+                        </DockPanel>
+
+
+                        <Button x:Name="playButton" Click="PlayButtonClicked" Margin="5" Grid.Column="1" Grid.Row="1" AutomationProperties.Name="playButton" Foreground="#FFF3F3F3" Content="Play" FontFamily="Cascadia Code" FontSize="28"/>
                     </Grid>
 
                 </Grid>

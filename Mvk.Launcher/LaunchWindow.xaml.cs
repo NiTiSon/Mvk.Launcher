@@ -10,4 +10,9 @@ public partial class LaunchWindow : Window
 	{
 		InitializeComponent();
 	}
+
+	public void ExitClicked(object sender, RoutedEventArgs args)
+	{
+		this.Close();
+	}
 }

@@ -2,13 +2,19 @@
 
 	<PropertyGroup>
 		<OutputType>WinExe</OutputType>
-		<TargetFramework>net6.0-windows</TargetFramework>
+		<TargetFramework>net48-windows</TargetFramework>
 		<Nullable>enable</Nullable>
 		<UseWPF>true</UseWPF>
+		<LangVersion>latest</LangVersion>
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <None Include="GameAdapter\v0\MvkGameInstance.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
 	  <PackageReference Include="SharpCompress" Version="0.32.2" />
+	  <PackageReference Include="System.Net.Http" Version="4.3.4" />
 	  <PackageReference Include="YamlDotNet" Version="12.0.0" />
 	</ItemGroup>
 
@@ -19,6 +25,19 @@
 	<ItemGroup>
 	  <Resource Include="nitis-icon.png" />
 	  <Resource Include="nitis-icon-mini.png" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Update="NewInstanceWindow.xaml.cs">
+	    <SubType>Code</SubType>
+	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Page Update="NewInstanceWindow.xaml">
+	    <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+	    <SubType>Designer</SubType>
+	  </Page>
 	</ItemGroup>
 
 </Project>

@@ -1,9 +1,10 @@
-﻿using Mvk.Launcher.GameAdapter;
+﻿using Mvk.Launcher.GameAdapter.v0;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,6 +19,7 @@ public static class LauncherCore
 	public static Options Options = new();
 	public static readonly string VersionsURI = "https://raw.githubusercontent.com/NiTiS-Dev/Mvk.Launcher.Repos/singleton/api/v0/versions.txt";
 	public static readonly string HomeDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), ".mvk");
+	public static readonly string VersionsDirectory = Path.Combine(HomeDirectory, ".versions");
 	public static readonly List<MvkVersion> GameVersions = new(32);
 	public static event Action OnVersionsRefreshed = new( () => { });
 	public static event Action OnOptionsLoaded = new( () => { });
@@ -42,7 +44,7 @@ public static class LauncherCore
 		process.StartInfo.FileName = "explorer.exe";
 		process.StartInfo.UseShellExecute = false;
 		process.StartInfo.CreateNoWindow = true;
-		process.StartInfo.ArgumentList.Add(link);
+		process.StartInfo.Arguments = link;
 
 		process.Start();
 	}
@@ -92,14 +94,18 @@ public static class LauncherCore
 		uint i = 0;
 		foreach (string line in versions.Split(new char[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries))
 		{
-			if (line.StartsWith('!'))
+			if (line.StartsWith("!"))
 				continue;
 
 			int hash = line.IndexOf('#');
 			int semi = line.IndexOf(';');
 
 			string versionName = line.Substring(0, hash);
+#if NET50_OR_GREATER
 			string uri = semi is -1 ? line[(hash+1)..(line.Length-1)] : line[(hash+1)..semi];
+#else
+			string uri = semi is -1 ? line.Substring(hash + 1) : line.Substring(hash + 1, (line.Length - 1) - hash - 1);
+#endif
 
 			GameVersions.Add(new(Version.Parse(versionName), i++, uri));
 		}

@@ -18,7 +18,25 @@
             <GradientStop Color="White" Offset="1"/>
         </LinearGradientBrush>
     </Window.BorderBrush>
-    <Grid>
-        
-    </Grid>
+    <Border Background="#50FFFFFF" CornerRadius="5" BorderBrush="{StaticResource WindowFrameBrush}" BorderThickness="3,0,3,3">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30" />
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Border Background="{StaticResource WindowFrameBrush}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+              CornerRadius="5,5,0,0" Margin="-1,0,-1,0">
+                <Grid>
+                    <TextBlock Foreground="White" FontWeight="Bold" VerticalAlignment="Center" Margin="10,2,10,2"
+            Text="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=Title}"/>
+                    <Button Content="X" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5" FontSize="7"
+                  Width="15" Height="15" Padding="0" Click="ExitClicked">
+                    </Button>
+                </Grid>
+            </Border>
+
+            <Label Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top" Panel.ZIndex="-3" Margin="3,3,3,3" FontSize="24" FontFamily="Cascadia Code" Foreground="#FF3F3F3F">Text</Label>
+            
+        </Grid>
+    </Border>
 </Window>
