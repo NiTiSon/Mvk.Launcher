@@ -3,8 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,7 +14,7 @@ namespace Mvk.Launcher;
 public static class LauncherCore
 {
 	public static Version ApplicationVersion = new(1, 0);
-	public static Options Options = new();
+	public static Options.Options Options = new();
 	public static readonly string VersionsURI = "https://raw.githubusercontent.com/NiTiS-Dev/Mvk.Launcher.Repos/singleton/api/v0/versions.txt";
 	public static readonly string HomeDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), ".mvk");
 	public static readonly string VersionsDirectory = Path.Combine(HomeDirectory, ".versions");
@@ -64,7 +62,7 @@ public static class LauncherCore
 
 		try
 		{
-			Options options = deserializer.Deserialize<Options>(File.ReadAllText(optionsPath));
+			Options.Options options = deserializer.Deserialize<Options.Options>(File.ReadAllText(optionsPath));
 
 			if (options is not null)
 				Options = options;

@@ -1,16 +1,15 @@
 ﻿using Mvk.Launcher;
 using Mvk.Launcher.GameAdapter;
 using Mvk.Launcher.GameAdapter.v0;
+using Mvk.Launcher.Options;
 using SharpCompress.Archives;
 using SharpCompress.Archives.Rar;
-using SharpCompress.Readers.Rar;
 using System;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -210,33 +209,7 @@ public partial class MainWindow : Window
 	}
 	private void NewInstance(object sender, RoutedEventArgs e)
 	{
-		if (!versionsLoaded)
-			return;
-
-		NewInstanceWindow newInstanceWindow = new();
-		newInstanceWindow.Show();
-		this.IsEnabled = false;
-		newInstanceWindow.Closing += (_, _) =>
-		{
-			this.IsEnabled = true;
-
-			if (newInstanceWindow is not null)
-			{
-				MvkGameInstance? instance = newInstanceWindow.createdInstance;
-
-				if (instance is null)
-					return;
-
-				if (LauncherCore.Options.Instances.Contains(instance))
-				{
-					LauncherCore.ShowError("Instance with same name already exists");
-					return;
-				}	
-
-				LauncherCore.Options.Instances.Add(instance);
-				RefreshInstancesList();
-			}
-		};
+		throw new NotImplementedException();
 	}
 	private void GameInstanceSelected(object sender, SelectionChangedEventArgs e)
 	{
