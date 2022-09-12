@@ -1,4 +1,6 @@
-﻿using Mvk.Launcher.GameAdapter.v0;
+﻿using Mvk.Launcher.Core;
+using Mvk.Launcher.GameAdapter.v0;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -11,31 +13,13 @@ using YamlDotNet.Serialization;
 
 namespace Mvk.Launcher;
 
-public static class LauncherCore
+public static class Utils
 {
-	public static Version ApplicationVersion = new(1, 0);
-	public static Options.Options Options = new();
-	public static readonly string VersionsURI = "https://raw.githubusercontent.com/NiTiS-Dev/Mvk.Launcher.Repos/singleton/api/v0/versions.txt";
-	public static readonly string HomeDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), ".mvk");
-	public static readonly string VersionsDirectory = Path.Combine(HomeDirectory, ".versions");
-	public static readonly List<MvkVersion> GameVersions = new(32);
-	public static event Action OnVersionsRefreshed = new( () => { });
-	public static event Action OnOptionsLoaded = new( () => { });
-	public static MessageBoxResult ShowError(Exception ex)
+	public static MessageBoxResult ShowError(this MvkLauncher launcher, Exception ex)
 	{
-		StringBuilder sb = new();
-
-		sb.AppendLine("Exception of type: " + ex.GetType().FullName);
-		if (!String.IsNullOrWhiteSpace(ex.Message))
-			sb.AppendLine("Message: " + ex.Message);
-		if (!String.IsNullOrWhiteSpace(ex.Source))
-			sb.AppendLine("Source: " + ex.Source);
-		sb.Append("StackTrace:\n" + ex.StackTrace);
-
-		return ShowError(sb.ToString());
+		string log = launcher.ShowError(ex);
+		return MessageBox.Show(log, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
 	}
-	public static MessageBoxResult ShowError(string errorText)
-		=> MessageBox.Show(errorText, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
 	public static void OpenBrowser(string link)
 	{
 		using Process process = new();

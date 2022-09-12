@@ -23,15 +23,15 @@ public partial class MainWindow : Window
 	private static volatile MainWindow This;
 	public MainWindow()
 	{
-		Closed += (o, e) => { LauncherCore.SaveOptions(); };
+		Closed += (o, e) => { Utils.SaveOptions(); };
 
-		LauncherCore.OnVersionsRefreshed += VersionsUpdated;
-		LauncherCore.OnOptionsLoaded += OptionsLoaded;
+		Utils.OnVersionsRefreshed += VersionsUpdated;
+		Utils.OnOptionsLoaded += OptionsLoaded;
 
 		InitializeComponent();
 		This = this;
-		LauncherCore.LoadVersions();
-		LauncherCore.LoadOptions();
+		Utils.LoadVersions();
+		Utils.LoadOptions();
 	}
 	private bool versionsLoaded = false;
 	private void VersionsUpdated()
@@ -47,7 +47,7 @@ public partial class MainWindow : Window
 	}
 	private void OptionsLoaded()
 	{
-		this.optionPlayerName.Text = LauncherCore.Options.PlayerName;
+		this.optionPlayerName.Text = Utils.Options.PlayerName;
 		this.optionPlayerName.TextChanged += UpdateName;
 
 		this.versionBox.IsEnabled = true;
@@ -56,13 +56,13 @@ public partial class MainWindow : Window
 	private void RefreshInstancesList()
 	{
 		this.versionBox.Items.Clear();
-		foreach (MvkGameInstance instance in LauncherCore.Options.Instances)
+		foreach (MvkGameInstance instance in Utils.Options.Instances)
 		{
 			MvkComboBoxItem comboBoxItem = new(instance.Name!, "find:" + instance.Version!);
 
 			this.versionBox.Items.Add(comboBoxItem);
 
-			if (instance.Name == LauncherCore.Options.SelectedInstance)
+			if (instance.Name == Utils.Options.SelectedInstance)
 			{
 				this.versionBox.SelectedItem = comboBoxItem;
 			}
@@ -70,7 +70,7 @@ public partial class MainWindow : Window
 	}
 	private void UpdateName(object sender, TextChangedEventArgs e)
 	{
-		LauncherCore.Options.PlayerName = String.IsNullOrWhiteSpace(this.optionPlayerName.Text) ? "Player" : this.optionPlayerName.Text;
+		Utils.Options.PlayerName = String.IsNullOrWhiteSpace(this.optionPlayerName.Text) ? "Player" : this.optionPlayerName.Text;
 	}
 
 	public void DragWindow(object sender, MouseButtonEventArgs args)
@@ -87,19 +87,19 @@ public partial class MainWindow : Window
 		if (sender is TextBlock tb)
 		{
 #if DEBUG
-			tb.Text = $"DEBUG: {LauncherCore.ApplicationVersion}";
+			tb.Text = $"DEBUG: {Utils.ApplicationVersion}";
 #else
 			tb.Text = "Version: " + LauncherCore.ApplicationVersion;
 #endif
 		}
 	}
 	public void NiTiSLinkClick(object sender, EventArgs args)
-		=> LauncherCore.OpenBrowser("https://github.com/NiTiS-Dev");
+		=> Utils.OpenBrowser("https://github.com/NiTiS-Dev");
 	public async void PlayButtonClicked(object sender, RoutedEventArgs e)
 	{
 		if (this.versionBox.SelectedItem is not MvkComboBoxItem selected)
 		{
-			LauncherCore.ShowError("Version not selected");
+			Utils.ShowError("Version not selected");
 
 			return;
 		}
@@ -110,9 +110,9 @@ public partial class MainWindow : Window
 		{
 			string versionName = download.Substring(5);
 
-			MvkVersion version = LauncherCore.GameVersions.Find((x) => x.Version.ToString(4) == versionName);
+			MvkVersion version = Utils.GameVersions.Find((x) => x.Version.ToString(4) == versionName);
 
-			MvkGameInstance instance = LauncherCore.Options.Instances.Find((x) => x.Name == selected.Content as string);
+			MvkGameInstance instance = Utils.Options.Instances.Find((x) => x.Name == selected.Content as string);
 
 			Button btn = sender as Button;
 
@@ -121,7 +121,7 @@ public partial class MainWindow : Window
 
 			Process gameLaunch = new();
 
-			string exePath = Path.Combine(LauncherCore.VersionsDirectory, version.Version.ToString(4), "MvkLauncher.exe");
+			string exePath = Path.Combine(Utils.VersionsDirectory, version.Version.ToString(4), "MvkLauncher.exe");
 
 			if (!File.Exists(exePath))
 			{
@@ -136,7 +136,7 @@ public partial class MainWindow : Window
 
 				using RarArchive archive = RarArchive.Open(tempRar);
 
-				string versionDirectory = Path.Combine(LauncherCore.VersionsDirectory, version.Version.ToString(4));
+				string versionDirectory = Path.Combine(Utils.VersionsDirectory, version.Version.ToString(4));
 
 				if (!Directory.Exists(versionDirectory))
 					Directory.CreateDirectory(versionDirectory);
@@ -157,7 +157,7 @@ public partial class MainWindow : Window
 			if (!File.Exists(optionsFile))
 			{
 				using StreamWriter sw = File.CreateText(Path.Combine(instance.SaveLocation, "options.ini"));
-				sw.WriteLine($"Nickname: {LauncherCore.Options.PlayerName}");
+				sw.WriteLine($"Nickname: {Utils.Options.PlayerName}");
 			}
 			else
 			{
@@ -168,7 +168,7 @@ public partial class MainWindow : Window
 				{
 					if (line.StartsWith("Nickname:"))
 					{
-						sb.AppendLine("Nickname: " + LauncherCore.Options.PlayerName);
+						sb.AppendLine("Nickname: " + Utils.Options.PlayerName);
 					}else
 					{
 						if (line.Length > 0 && !Char.IsWhiteSpace(line[0]))
@@ -191,16 +191,16 @@ public partial class MainWindow : Window
 			gameLaunch.Start();
 			gameLaunch.Exited += (s, e) =>
 			{
-				if (LauncherCore.Options.AfterLaunchAction == AfterLaunchAction.Hide)
+				if (Utils.Options.AfterLaunchAction == AfterLaunchAction.Hide)
 				{
 					Dispatcher.Invoke(delegate { this.Show(); });
 				}
 			};
-			if (LauncherCore.Options.AfterLaunchAction == AfterLaunchAction.Hide)
+			if (Utils.Options.AfterLaunchAction == AfterLaunchAction.Hide)
 			{
 				this.Hide();
 			}
-			else if (LauncherCore.Options.AfterLaunchAction == AfterLaunchAction.Exit)
+			else if (Utils.Options.AfterLaunchAction == AfterLaunchAction.Exit)
 			{
 				this.Close();
 			}
@@ -216,6 +216,6 @@ public partial class MainWindow : Window
 	if (this.versionBox.SelectedItem is not MvkComboBoxItem item)
 			return;
 
-		LauncherCore.Options.SelectedInstance = item.Content as string;
+		Utils.Options.SelectedInstance = item.Content as string;
 	}
 }

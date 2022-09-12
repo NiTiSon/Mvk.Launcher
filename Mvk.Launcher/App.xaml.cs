@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Serilog;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -12,4 +13,13 @@ namespace Mkv.Launcher;
 /// </summary>
 public partial class App : Application
 {
+	protected override void OnStartup(StartupEventArgs e)
+	{
+		base.OnStartup(e);
+
+		Log.Logger = new LoggerConfiguration()
+			.WriteTo.File("logs/last.log")
+			.WriteTo.File($"logs/{DateTime.Now:HH:mm.ss-yyyy/MM/dd}.log")
+			.CreateLogger();
+	}
 }

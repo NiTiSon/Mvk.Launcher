@@ -9,18 +9,11 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <None Include="GameAdapter\v0\MvkGameInstance.cs" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <PackageReference Include="SharpCompress" Version="0.32.2" />
-	  <PackageReference Include="System.Net.Http" Version="4.3.4" />
-	  <PackageReference Include="NiTiS.IO" Version="2.0.1.2" />
-	  <PackageReference Include="YamlDotNet" Version="12.0.0" />
-	</ItemGroup>
-
-	<ItemGroup>
 	  <Page Include="App.xaml" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\Mvk.Launcher.Core\Mvk.Launcher.Core.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
