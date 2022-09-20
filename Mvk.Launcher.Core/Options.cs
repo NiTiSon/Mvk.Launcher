@@ -1,11 +1,12 @@
-﻿using System;
+﻿using NiTiS.IO;
+using System;
 using System.Collections.Generic;
 using YamlDotNet.Serialization;
 
 namespace Mvk.Launcher.Core;
 
 [Serializable]
-public class Options
+public sealed class Options
 {
 	[YamlMember(Alias = "user-name", Description = "Custom username")]
 	public string? UserName { get; set; }
@@ -13,6 +14,5 @@ public class Options
 	public string? SelectedProfile { get; set; }
 	[YamlMember(Alias = "action-after-launch", Description = "What to do with the window after the game is launched")]
 	public AfterLaunchAction AfterLaunchAction { get; set; } = default;
-
 	public static readonly Options Default = new();
 }

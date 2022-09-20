@@ -1,10 +1,8 @@
-﻿using Serilog;
+﻿using Mkv.Launcher.Windows;
+using Mvk.Launcher.Core;
+using NiTiS.IO;
+using Serilog;
 using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace Mkv.Launcher;
@@ -13,13 +11,28 @@ namespace Mkv.Launcher;
 /// </summary>
 public partial class App : Application
 {
+	private static readonly Directory MvkFolder = new(System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), ".mvk/"));
+	private static readonly Directory VersionFolder = MvkFolder.SubDirectory("versions");
+	public static MvkLauncher Launcher { get; } = new(MvkFolder, VersionFolder);
 	protected override void OnStartup(StartupEventArgs e)
 	{
-		base.OnStartup(e);
-
+		new File(System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), ".mvk/", "logs/last.log")).TryDelete();
 		Log.Logger = new LoggerConfiguration()
-			.WriteTo.File("logs/last.log")
-			.WriteTo.File($"logs/{DateTime.Now:HH:mm.ss-yyyy/MM/dd}.log")
+			.WriteTo.File(System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), ".mvk/", "logs/last.log"))
+			.WriteTo.File(System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), ".mvk/", $"logs/{DateTime.Now:HH:mm.ss-yyyy/MM/dd}.log"))
 			.CreateLogger();
+
+		base.OnStartup(e);
+	}
+
+	private new void Launch(object sender, StartupEventArgs e)
+	{
+		LauncherWindow window = new();
+
+		window.Show();
+
+		window.Closing += (_, _) =>
+		{
+		};
 	}
 }

@@ -13,12 +13,9 @@
 		<PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
 		<PackageReference Include="SharpCompress" Version="0.32.2" />
 		<PackageReference Include="System.Net.Http" Version="4.3.4" />
-		<PackageReference Condition="$(TMP)!='B:\!Temp'" Include="NiTiS.IO" Version="2.0.1.2" />
+		<PackageReference Include="NiTiS.IO" Version="2.0.1.6" />
 		<PackageReference Include="YamlDotNet" Version="12.0.0" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <ProjectReference Condition="$(TMP)=='B:\!Temp'" Include="..\..\NiTiS.IO\Source\NiTiS.IO.csproj" />
+		<PackageReference Include="NiTiS.NBT" Version="0.1" />
 	</ItemGroup>
 
 </Project>

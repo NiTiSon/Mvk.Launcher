@@ -23,29 +23,29 @@ public sealed class MvkLauncher
 	/// <summary>
 	/// Load save file
 	/// </summary>
-	public async Task Initialize(ProgressInfo<string, float> progress)
+	public async Task Initialize()
 	{
+		Log.Information("Initialize launcher...");
 		if (saveFile.Exists)
 		{
 			try
 			{
-				progress.Report("Reading options file...", 0f);
 				using FStream optionsStream = saveFile.Read();
 
 				using System.IO.StreamReader reader = new(optionsStream);
 				
-				progress.Report("Deserialize options file", 0.8f);
 				Options = deserializer.Deserialize<Options>(await reader.ReadToEndAsync());
-				progress.Complete();
+				return;
 			}
 			catch (Exception exception)
 			{
+				Log.Fatal("Unable to read options file");
 				ShowError(exception);
-				progress.Fail();
 			}
 		}
+		Options = Options.Default;
 	}
-	public string ShowError(Exception error)
+	public static string ShowError(Exception error)
 	{
 		string log = $"Exception: {error.GetType().FullName}\nSource: {error.Source}\nStackTrace: {error.StackTrace}\nMessage: {error.Message}";
 		Log.Error(log);
