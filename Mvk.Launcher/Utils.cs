@@ -9,18 +9,20 @@ namespace Mvk.Launcher;
 public static class Utils
 {
 	[Obsolete("Replace by custom error handler")]
-	public static MessageBoxResult ShowError(this MvkLauncher launcher, Exception ex)
+	public static MessageBoxResult ShowError(this LauncherCore launcher, Exception ex)
 	{
-		string log = MvkLauncher.ShowError(ex);
+		string log = LauncherCore.ShowError(ex);
 		return MessageBox.Show(log, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
 	}
+	public static void OpenBrowser(Uri link)
+		=> OpenBrowser(link.AbsoluteUri);
 	public static void OpenBrowser(string link)
 	{
 		using Process process = new();
-		process.StartInfo.FileName = "start";
+		process.StartInfo.FileName = "cmd.exe";
 		process.StartInfo.UseShellExecute = false;
 		process.StartInfo.CreateNoWindow = true;
-		process.StartInfo.Arguments = link;
+		process.StartInfo.Arguments = $"/C start {link}";
 
 		process.Start();
 	}

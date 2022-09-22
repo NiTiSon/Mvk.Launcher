@@ -49,7 +49,7 @@
 
                     <TextBlock Foreground="#55f3f3f3" Grid.Row="2" Text="Version" HorizontalAlignment="Left"
                  VerticalAlignment="Bottom" FontSize="15" FontFamily="Cascadia Code" Margin="10,8,8,8" />
-                    <Image Margin="132,268,10,10" Source="/nitis-icon-mini.png" Stretch="Fill" Cursor="Hand" MouseDown="NiTiSLinkClick" Grid.Row="1" Width="56" Height="56" Grid.RowSpan="2" />
+                    <Image Margin="132,268,10,10" Source="/Resources/nitis-icon-mini.png" Stretch="Fill" Cursor="Hand" MouseDown="NiTiSLinkClick" Grid.Row="1" Width="56" Height="56" Grid.RowSpan="2" />
                 </Grid>
                 <Grid Background="#f3f3f3" Grid.Column="1">
                     <Grid.RowDefinitions>

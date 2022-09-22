@@ -1,6 +1,7 @@
 ﻿using Mvk.Launcher;
 using Mvk.Launcher.Core;
 using Mvk.Launcher.Core.Versions.API;
+using NiTiS.IO;
 using System;
 using System.Windows;
 using System.Windows.Input;
@@ -11,9 +12,11 @@ namespace Mkv.Launcher.Windows;
 /// </summary>
 public partial class LauncherWindow : Window
 {
-	public LauncherWindow()
+	private LauncherCore core;
+	public LauncherWindow(Directory saveDirectory)
 	{
-		App.Launcher.Initialize();
+		core = new(saveDirectory);
+		core.Load();
 		InitializeComponent();
 	}
 	public void DragWindow(object sender, MouseButtonEventArgs args)
