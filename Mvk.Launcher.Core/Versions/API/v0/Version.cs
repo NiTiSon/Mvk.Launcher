@@ -3,19 +3,19 @@ using YamlDotNet.Serialization;
 
 namespace Mvk.Launcher.Core.Versions.API.v0;
 
-public sealed class v0Version : IVersion
+public sealed class Version : IVersion
 {
 	[YamlMember(Alias = "name")]
-	public string Name => Version;
+	public string Name => VersionString;
 
 	[YamlMember(Alias = "version")]
-	public string Version { get; }
+	public string VersionString { get; }
 
 	[YamlMember(Alias = "download-uri")]
 	public Uri DownloadUri { get; }
-	public v0Version(string version, Uri downloadUri)
+	public Version(string version, Uri downloadUri)
 	{
-		Version = version;
+		VersionString = version;
 		DownloadUri = downloadUri;
 	}
 }
