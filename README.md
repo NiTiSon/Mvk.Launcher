@@ -6,3 +6,7 @@
 ![](https://github.com/NiTiS-Dev/Mvk.Launcher/blob/singleton/imgs/interface-p1.png?raw=true)
 
 </div>
+
+## Terms
+**Version** - some version of game  
+**Profile** - a launch profile for specific game version  
