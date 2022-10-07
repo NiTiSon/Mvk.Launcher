@@ -25,6 +25,6 @@ jobs:
         dotnet publish -p:PublishProfile={{matrix.configuration}}
         
     - name: Artifact Pack 
-        uses: actions/upload-artifact@v2
-        with:
-          path: .publish/{{matrix.configuration}}/*.dll
+      uses: actions/upload-artifact@v2
+      with:
+        path: .publish/{{matrix.configuration}}/*.dll
