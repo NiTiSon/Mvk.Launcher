@@ -1,9 +1,9 @@
-name: Tab Build
+name: Compilation
 
 on:
+  pull_request:
+    types: [opened]
   push:
-    tags:
-      - '*'
 
   workflow_dispatch:
 
@@ -27,4 +27,5 @@ jobs:
     - name: Artifact Pack 
       uses: actions/upload-artifact@v2
       with:
+        name: "{{matrix.configuration}}"
         path: .publish/{{matrix.configuration}}/*.dll
