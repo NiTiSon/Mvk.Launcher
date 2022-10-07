@@ -28,22 +28,6 @@ public sealed class LauncherCore
 		versionsFile = saveDir.File("versions.yml");
 		net = new HttpClient();
 	}
-	public void Load()
-	{
-		Log.Information("{0}.Load()", nameof(LauncherCore));
-		Task opt = LoadOptionsFile();
-		Task ver = LoadVersions();
-
-		Task.WaitAll(opt, ver);
-		Log.Information("{0} Loading completed", nameof(LauncherCore));
-	}
-	public void Save()
-	{
-		Task opt = SaveOptionsFile();
-
-		Task.WaitAll(opt);
-		Log.Information("{0} Saving completed", nameof(LauncherCore));
-	}
 	public async Task LoadOptionsFile()
 	{
 		Log.Information("{0}.LoadOptionsFile()", nameof(LauncherCore));
@@ -66,7 +50,7 @@ public sealed class LauncherCore
 		else
 			await SaveOptionsFile();
 	}
-	private async Task SaveOptionsFile()
+	public async Task SaveOptionsFile()
 	{
 		Log.Information("{0}.SaveOptionsFile()", nameof(LauncherCore));
 		try

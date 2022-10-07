@@ -1,10 +1,13 @@
 ﻿using Mvk.Launcher;
+using Mvk.Launcher.App.Windows;
 using Mvk.Launcher.Core;
 using NiTiS.IO;
 using Serilog;
 using System;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+
 
 namespace Mkv.Launcher.Windows;
 /// <summary>
@@ -18,8 +21,30 @@ public partial class LauncherWindow
 		Log.Information("{0}.new()", nameof(LauncherWindow));
 		DataContext = this;
 		core = new(saveDirectory);
-		core.Load();
+		core.LoadOptionsFile().Wait();
+
+		bool _vLoaded = false;
+		Task loadV = core.LoadVersions();
+		loadV.OnComplete(() =>
+		{
+			_vLoaded = true;
+		});
+		Task wait = Task.Delay(1000 * 15).OnComplete(() =>
+		{
+			if (!_vLoaded)
+			{
+				Log.Error("{0} takes too long to execute", nameof(LauncherCore.LoadVersions));
+			}
+		});
+		Task.WaitAny(loadV, wait);
+
 		InitializeComponent();
+
+		if (_vLoaded)
+		{
+			newGameInstanceButton.IsEnabled = true;
+			playButton.IsEnabled = false;
+		}
 	}
 	#region WindowFields
 	public string PlayerNameBind
@@ -37,4 +62,15 @@ public partial class LauncherWindow
 
 	public void NiTiSLinkClick(object sender, EventArgs args)
 		=> Utils.OpenBrowser("https://github.com/NiTiS-Dev");
+	private void EditOrCreateProfile(object sender, RoutedEventArgs e)
+	{
+		ProfileEditorWindow window = new();
+		this.IsEnabled = false;
+		window.Show();
+
+		window.Closed += (_, _) =>
+		{
+			this.IsEnabled = true;
+		};
+	}
 }

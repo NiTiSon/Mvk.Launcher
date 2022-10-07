@@ -51,7 +51,10 @@ public partial class App : Application
 			Log.Warning("Saving files before closing...");
 
 			if (window.core is not null)
-				window.core.Save();
+			{
+				window.core.SaveOptionsFile().Wait();
+
+			}
 
 			Log.Information("Window closing...");
 			Log.CloseAndFlush();

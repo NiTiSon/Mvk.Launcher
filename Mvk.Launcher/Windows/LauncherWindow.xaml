@@ -78,7 +78,7 @@
                             <ComboBox x:Name="versionBox" Margin="10" HorizontalAlignment="Left" VerticalAlignment="Center" AutomationProperties.Name="versionSelectBox">
                                 <ComboBoxItem x:Name="loadingItem" Content="Loading..." IsEnabled="false" IsSelected="true"></ComboBoxItem>
                             </ComboBox>
-                            <Button IsEnabled="False" x:Name="newGameInstanceButton" Width="25" Height="25" Background="{x:Null}" Content="+" FontSize="22" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Cascadia Code" />
+                            <Button Click="EditOrCreateProfile" x:Name="newGameInstanceButton" Width="25" Height="25" Background="{x:Null}" Content="+" FontSize="22" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Cascadia Code" />
                         </DockPanel>
 
 

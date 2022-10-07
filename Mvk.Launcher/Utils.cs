@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 
 namespace Mvk.Launcher;
 
@@ -27,5 +29,12 @@ public static class Utils
 		}
 
 		process.Start();
+	}
+	public static Task OnComplete(this Task task, Action act)
+	{
+		TaskAwaiter awaiter = task.GetAwaiter();
+		awaiter.UnsafeOnCompleted(act);
+
+		return task;
 	}
 }
