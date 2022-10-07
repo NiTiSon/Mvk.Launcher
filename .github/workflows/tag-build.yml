@@ -22,7 +22,7 @@ jobs:
 
     - name: Build
       run: |
-        dotnet publish Mvk.Launcher -p:PublishProfile={{matrix.configuration}}
+        dotnet publish Mvk.Launcher -p:PublishProfile={{matrix.configuration}} -o .publish/{{matrix.configuration}}/
         
     - name: Artifact Pack 
       uses: actions/upload-artifact@v2
