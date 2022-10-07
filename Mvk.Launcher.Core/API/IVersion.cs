@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Mvk.Launcher.Core.Versions.API;
+namespace Mvk.Launcher.Core.API;
 
 public interface IVersion
 {

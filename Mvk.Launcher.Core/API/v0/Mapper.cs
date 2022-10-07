@@ -1,11 +1,12 @@
-﻿using System;
+﻿using Serilog;
+using System;
 using System.Collections.Generic;
 
-namespace Mvk.Launcher.Core.Versions.API.v0;
+namespace Mvk.Launcher.Core.API.v0;
 
 public sealed class Mapper : IMapper
 {
-	private readonly List<v0.Version> versions = new(24);
+	private readonly List<v1.Version> versions = new(24);
 	public void Clear()
 		=> versions.Clear();
 	public bool ParseData(string data)
@@ -31,7 +32,7 @@ public sealed class Mapper : IMapper
 				string uri = semi is -1 ? line.Substring(hash + 1) : line.Substring(hash + 1, (line.Length - 1) - hash - 1);
 #endif
 
-				versions.Add(new(versionName, new Uri(uri)));
+				versions.Add(new(versionName, versionName, new Uri(uri)));
 
 
 			}

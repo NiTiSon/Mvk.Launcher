@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Mvk.Launcher.Core.Versions.API;
+namespace Mvk.Launcher.Core.API;
 
 public interface IMapper
 {

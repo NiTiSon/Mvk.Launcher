@@ -1,7 +1,7 @@
 ﻿using System;
 using YamlDotNet.Serialization;
 
-namespace Mvk.Launcher.Core.Versions.API.v1;
+namespace Mvk.Launcher.Core.API.v1;
 
 public class Version : IVersion
 {
@@ -17,4 +17,6 @@ public class Version : IVersion
 		VersionString = version;
 		DownloadUri = downloadUri;
 	}
+	public override string ToString()
+		=> $"{Name} {(Name != VersionString ? "v:" + VersionString : string.Empty)}";
 }
