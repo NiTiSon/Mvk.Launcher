@@ -20,7 +20,7 @@ public partial class App : Application
 	private static readonly Directory MvkFolder = new(System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), ".mvk/launcher/"));
 	protected override void OnStartup(StartupEventArgs e)
 	{
-		string logFileName = System.IO.Path.Combine(MvkFolder.Path, "logs/{StartupTime:yy-MM-dd HH.mm.ss}.log");
+		string logFileName = System.IO.Path.Combine(MvkFolder.Path, $"logs/{StartupTime:yy-MM-dd HH.mm.ss}.log");
 		string lastLogFileName = System.IO.Path.Combine(MvkFolder.Path, "logs/last.log");
 
 		new File(lastLogFileName).TryDelete();

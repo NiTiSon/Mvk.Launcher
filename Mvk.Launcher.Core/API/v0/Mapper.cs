@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Mvk.Launcher.Core.API.v0;
 
-public sealed class Mapper : IMapper
+public sealed class Mapper : IMapper<v1.Version>
 {
 	private readonly List<v1.Version> versions = new(24);
 	public void Clear()
@@ -43,6 +43,6 @@ public sealed class Mapper : IMapper
 		}
 		return true;
 	}
-	public IEnumerable<IVersion> GetVersions()
+	public IEnumerable<v1.Version> GetVersions()
 		=> versions;
 }

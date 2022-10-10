@@ -2,17 +2,22 @@
 using NiTiS.IO;
 using Serilog;
 using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using YamlDotNet.Core;
+using YamlDotNet.Core.Events;
 using YamlDotNet.Serialization;
+using YamlDotNet.Serialization.NodeTypeResolvers;
+using YamlDotNet.Serialization.Utilities;
 
 namespace Mvk.Launcher.Core;
 
 public sealed class LauncherCore
 {
 	private readonly File optionsFile, profilesFile, versionsFile;
-	private readonly Directory saveDir;
+	private readonly Directory saveDir, cacheDir;
 	private readonly HttpClient net;
 	private static readonly ISerializer serializer;
 	private static readonly IDeserializer deserializer;
@@ -23,9 +28,10 @@ public sealed class LauncherCore
 	{
 		Log.Information("{0}.new()", nameof(LauncherCore));
 		saveDir = saveDirectory;
+		cacheDir = saveDirectory.SubDirectory("cache");
 		optionsFile = saveDir.File("options.yml");
 		profilesFile = saveDir.File("profiles.yml");
-		versionsFile = saveDir.File("versions.yml");
+		versionsFile = cacheDir.File("versions.yml");
 		net = new HttpClient();
 	}
 	public async Task LoadOptionsFile()
@@ -70,6 +76,37 @@ public sealed class LauncherCore
 		Log.Information("{0}.LoadVersions()", nameof(LauncherCore));
 		try
 		{
+			DateTime lastCheck = versionsFile.Exists ? versionsFile.LastAccessTime : DateTime.MinValue;
+			if (Options.VersionCaching)
+			{
+				TimeSpan r = DateTime.Now - lastCheck;
+
+				if (r.TotalHours >= Options.CacheHoursLifetime)
+				{
+					Log.Warning("Re-download versions");
+					goto REDOWNLOAD;
+				}
+				else
+					goto READ;
+			}
+			else
+				goto REDOWNLOAD;
+
+			READ:
+			Log.Information("Load versions from cache");
+			try
+			{
+				object collections = deserializer.Deserialize<VersionCollection>(versionsFile.ReadAllText());
+			}
+			catch (Exception exception)
+			{
+				Log.Fatal("{0}: {1}", exception.GetType().Name, exception.Message);
+				Log.Warning(@"↓ ↓ ↓");
+				Log.Warning("Trying to re-download versions");
+				goto REDOWNLOAD;
+			}
+
+			REDOWNLOAD:
 			HttpResponseMessage response = net.GetAsync("https://raw.githubusercontent.com/NiTiS-Dev/Mvk.Launcher.Repos/app/api/v1/versions.yml").Result;
 
 			if (!response.IsSuccessStatusCode)
@@ -80,6 +117,12 @@ public sealed class LauncherCore
 			foreach (API.v1.VersionsMap.Entry entry in vers.Versions)
 			{
 				await Versions.Resolve(entry, net);
+			}
+			if (Options.VersionCaching)
+			{
+				versionsFile.Parent?.Create();
+				versionsFile.Create();
+				versionsFile.WriteAllText(serializer.Serialize(Versions));
 			}
 		}
 		catch (Exception exception)

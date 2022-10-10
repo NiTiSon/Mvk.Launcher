@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace Mvk.Launcher.Core.API.v1;
 
-public sealed class Mapper : IMapper
+public sealed class Mapper : IMapper<Version>
 {
 	private readonly List<Version> versions = new(24);
 	public void Clear()
 		=> versions.Clear();
-	public IEnumerable<IVersion> GetVersions()
+	public IEnumerable<Version> GetVersions()
 		=> versions;
 	public bool ParseData(string data)
 	{

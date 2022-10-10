@@ -8,7 +8,7 @@
         WindowStyle="None" AllowsTransparency="True"
         Background="Transparent"
         ResizeMode="NoResize"
-        Title="Mvk Launcher" Height="450" Width="800">
+        Title="Mvk Launcher" Height="450" Width="600">
     <Border Background="#50FFFFFF" CornerRadius="5" BorderThickness="3,0,3,3">
         <Grid>
             <Grid.RowDefinitions>
@@ -26,7 +26,59 @@
                 </Grid>
             </Border>
             <Grid Grid.Row="1" Background="#333">
-                
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*" />
+                        <RowDefinition Height="1*" />
+                        <RowDefinition Height="1*" />
+                        <RowDefinition Height="1*" />
+                        <RowDefinition Height="1*" />
+                        <RowDefinition Height="1*" />
+                        <RowDefinition Height="1*" />
+                        <RowDefinition Height="1*" />
+                        <RowDefinition Height="1*" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.1*" />
+                        <ColumnDefinition Width="5*" />
+                        <ColumnDefinition Width="1.2*" />
+                        <ColumnDefinition Width="0.78*" />
+                        <ColumnDefinition Width="1.2*" />
+                        <ColumnDefinition Width="0.33*" />
+                    </Grid.ColumnDefinitions>
+
+                    <TextBox Grid.Row="1" Grid.Column="1"
+                             x:Name="profileName"
+                             Text="Profile name..." HorizontalAlignment="Center" Height="40" Width="290" TextWrapping="WrapWithOverflow"
+                             VerticalAlignment="Stretch" VerticalContentAlignment="Center"
+                             FontSize="24px" FontFamily="Cascadia Code"
+                             Foreground="#3f3f3f"
+                             />
+                    <TextBox Grid.Row="3" Grid.Column="1"
+                             x:Name="gamePath"
+                             Text="Path to install" HorizontalAlignment="Center" Height="40" Width="290" TextWrapping="WrapWithOverflow"
+                             VerticalAlignment="Stretch" VerticalContentAlignment="Center"
+                             FontSize="24px" FontFamily="Cascadia Code"
+                             Foreground="#3f3f3f"
+                             />
+                    <TextBox Grid.Row="5" Grid.Column="1"
+                             x:Name="savePath"
+                             Text="Save location" HorizontalAlignment="Center" Height="40" Width="290" TextWrapping="WrapWithOverflow"
+                             VerticalAlignment="Stretch" VerticalContentAlignment="Center"
+                             FontSize="24px" FontFamily="Cascadia Code"
+                             Foreground="#3f3f3f"
+                             />
+
+                    <Button Grid.Row="7" Grid.Column="2"
+                            Content="Cancel" FontFamily="Cascadia code" FontSize="15px"
+                            Click="ExitClicked"
+                            />
+                    <Button Grid.Row="7" Grid.Column="4"
+                            Content="Ok" FontFamily="Cascadia code" FontSize="19px"
+                            Click="SaveClicked"
+                            />
+
+                </Grid>
             </Grid>
         </Grid>
     </Border>

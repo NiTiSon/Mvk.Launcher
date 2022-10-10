@@ -2,9 +2,9 @@
 
 namespace Mvk.Launcher.Core.API;
 
-public interface IMapper
+public interface IMapper<TVERSION>
 {
 	public void Clear();
 	public bool ParseData(string data);
-	public IEnumerable<IVersion> GetVersions();
+	public IEnumerable<TVERSION> GetVersions();
 }

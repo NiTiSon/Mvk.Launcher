@@ -8,11 +8,11 @@ using static Mvk.Launcher.Core.API.v1.VersionsMap.Entry.Type;
 
 namespace Mvk.Launcher.Core.API;
 
-public sealed class VersionCollection : List<IVersion>
+public sealed class VersionCollection : List<v1.Version>
 {
 	public VersionCollection() { }
 	public VersionCollection(int capacity) : base(capacity) { }
-	public VersionCollection(IEnumerable<IVersion> collection) : base(collection) { }
+	public VersionCollection(IEnumerable<v1.Version> collection) : base(collection) { }
 	public async Task Resolve(v1.VersionsMap.Entry entry, HttpClient net)
 	{
 		switch (entry.Solution)
