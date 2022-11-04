@@ -1,5 +1,7 @@
-﻿using Serilog;
+﻿using Mvk.Launcher.Core;
+using Serilog;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace Mvk.Launcher.App.Windows;
@@ -8,9 +10,16 @@ namespace Mvk.Launcher.App.Windows;
 /// </summary>
 public partial class ProfileEditorWindow : Window
 {
-	public ProfileEditorWindow()
+	public Profile? Profile { get; private set; }
+	private readonly ComboBoxItem? item;
+	public ProfileEditorWindow(ComboBoxItem? item)
 	{
 		Log.Information("{0}.new()", nameof(ProfileEditorWindow));
+		this.item = item;
+
+		if (item is not null)
+			this.createOrSaveButton.Content = "Save";
+
 		InitializeComponent();
 	}
 	public void DragWindow(object sender, MouseButtonEventArgs args)
@@ -19,7 +28,7 @@ public partial class ProfileEditorWindow : Window
 		=> Close();
 	public void SaveClicked(object sender, RoutedEventArgs args)
 	{
-
+		
 
 		Close();
 	}

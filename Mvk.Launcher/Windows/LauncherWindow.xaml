@@ -51,7 +51,7 @@
 
                     <TextBlock Foreground="#55f3f3f3" Grid.Row="2" Text="{Binding VersionBind}" HorizontalAlignment="Left"
                  VerticalAlignment="Bottom" FontSize="15" FontFamily="Cascadia Code" Margin="10,8,8,8" />
-                    <Image Margin="132,268,10,10" Source="/Resources/nitis-icon-mini.png" Stretch="Fill" Cursor="Hand" MouseDown="NiTiSLinkClick" Grid.Row="1" Width="56" Height="56" Grid.RowSpan="2" />
+                    <Image Margin="132,268,10,10" Source="/Resources/nitis-symbol-white.png" Stretch="Fill" Cursor="Hand" MouseDown="NiTiSLinkClick" Grid.Row="1" Width="56" Height="56" Grid.RowSpan="2" />
                 </Grid>
                 <Grid Background="#f3f3f3" Grid.Column="1">
                     <Grid.RowDefinitions>
@@ -75,8 +75,7 @@
 
 
                         <DockPanel HorizontalAlignment="Center" Grid.Row="1" Grid.Column="0">
-                            <ComboBox x:Name="versionBox" Margin="10" HorizontalAlignment="Left" VerticalAlignment="Center" AutomationProperties.Name="versionSelectBox">
-                                <ComboBoxItem x:Name="loadingItem" Content="Loading..." IsEnabled="false" IsSelected="true"></ComboBoxItem>
+                            <ComboBox x:Name="profileBox" Margin="10" HorizontalAlignment="Left" VerticalAlignment="Center" AutomationProperties.Name="versionSelectBox">
                             </ComboBox>
                             <Button Click="EditOrCreateProfile" x:Name="newGameInstanceButton" Width="25" Height="25" Background="{x:Null}" Content="+" FontSize="22" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Cascadia Code" />
                         </DockPanel>

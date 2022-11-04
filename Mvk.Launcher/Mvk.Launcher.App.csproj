@@ -27,8 +27,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <!-- Resource Include="nitis-icon.png" /-->
-	  <Resource Include="Resources\nitis-icon-mini.png" />
+	  <Resource Include="Resources\nitis-symbol-white.png" />
 	</ItemGroup>
 
 </Project>

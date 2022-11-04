@@ -6,6 +6,7 @@ using Serilog;
 using System;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 
@@ -64,7 +65,7 @@ public partial class LauncherWindow
 		=> Utils.OpenBrowser("https://github.com/NiTiS-Dev");
 	private void EditOrCreateProfile(object sender, RoutedEventArgs e)
 	{
-		ProfileEditorWindow window = new();
+		ProfileEditorWindow window = new(profileBox.SelectedItem as ComboBoxItem);
 		this.IsEnabled = false;
 		window.Show();
 

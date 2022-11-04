@@ -4,6 +4,12 @@
         <GradientStop Color="#3a3a3a" Offset="0"/>
         <GradientStop Color="#4a4a4a" Offset="1"/>
     </LinearGradientBrush>
+
+    <Style x:Key="TextBox" TargetType="{x:Type TextBox}">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderThickness" Value="0" />
+    </Style>
+    
     <!--#region ComboBox-->
 
     <ControlTemplate x:Key="ComboBoxToggleButton" TargetType="{x:Type ToggleButton}">
