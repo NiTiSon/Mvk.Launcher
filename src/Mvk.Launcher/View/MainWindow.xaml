@@ -1,0 +1,44 @@
+﻿<Window x:Class="Mvk.Launcher.MainWindow"
+		xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		xmlns:local="clr-namespace:Mvk.Launcher"
+		mc:Ignorable="d"
+		WindowStartupLocation="CenterScreen"
+		WindowStyle="None"
+		MinHeight="450" MinWidth="700">
+	<WindowChrome.WindowChrome>
+		<WindowChrome CaptionHeight="0"/>
+	</WindowChrome.WindowChrome>
+
+	<Grid Background="{StaticResource Background}">
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="65px" />
+			<ColumnDefinition Width="*" />
+		</Grid.ColumnDefinitions>
+
+		<Grid Grid.Column="1" >
+			<Grid.RowDefinitions>
+				<RowDefinition Height="35px" />
+				<RowDefinition Height="*" />
+			</Grid.RowDefinitions>
+
+			<DockPanel HorizontalAlignment="Right">
+				<Button x:Name="MinimizeButton"
+					Content="{StaticResource Minimize}"
+					Style="{StaticResource HeaderButton}"
+					Click="MinimizeButton_Click" />
+				<Button x:Name="ScaleButton"
+					Content="{StaticResource Maximize}"
+					Style="{StaticResource HeaderButton}"
+					Click="ScaleButton_Switch" />
+				<Button x:Name="CloseButton"
+					Content="{StaticResource Close}"
+					Style="{StaticResource HeaderCloseButton}"
+					Click="CloseButton_Click" />
+			</DockPanel>
+			<Image Source="Resources/Close.png" />
+		</Grid>
+	</Grid>
+</Window>

@@ -1,1 +1,0 @@
-﻿global using FStream = System.IO.FileStream;
