@@ -6,13 +6,11 @@
 		xmlns:local="clr-namespace:Mvk.Launcher"
 		mc:Ignorable="d"
 		WindowStartupLocation="CenterScreen"
-		WindowStyle="None"
+		WindowStyle="SingleBorderWindow"
+		Loaded="Window_Loaded"
+		MouseLeftButtonDown="Window_MouseLeftButtonDown"
 		MinHeight="450" MinWidth="700">
-	<WindowChrome.WindowChrome>
-		<WindowChrome CaptionHeight="0"/>
-	</WindowChrome.WindowChrome>
-
-	<Grid Background="{StaticResource Background}">
+	<Grid x:Name="root" Background="{StaticResource Background}">
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="65px" />
 			<ColumnDefinition Width="*" />
@@ -38,7 +36,6 @@
 					Style="{StaticResource HeaderCloseButton}"
 					Click="CloseButton_Click" />
 			</DockPanel>
-			<Image Source="Resources/Close.png" />
 		</Grid>
 	</Grid>
 </Window>

@@ -4,6 +4,7 @@
 	<Image x:Key="Close" Source="../Resources/Close.png" />
 	<Image x:Key="Minimize" Source="../Resources/Minimize.png" />
 	<Image x:Key="Maximize" Source="../Resources/Maximize.png" />
+	<Image x:Key="Normalize" Source="../Resources/Normalize.png" />
 
 	<Color x:Key="BackColor">#16181C</Color>
 	<Color x:Key="UIColor">#26292F</Color>
@@ -24,7 +25,6 @@
 	<SolidColorBrush x:Key="HeaderButton.Disabled.Background" Color="Transparent"/>
 	<SolidColorBrush x:Key="HeaderButton.Disabled.Foreground" Color="Transparent"/>
 
-	<!-- TODO: Add ImageButton element -->
 	<Style TargetType="{x:Type Button}" x:Key="HeaderButton">
 		<Setter Property="Height" Value="35px" />
 		<Setter Property="Width" Value="25px" />

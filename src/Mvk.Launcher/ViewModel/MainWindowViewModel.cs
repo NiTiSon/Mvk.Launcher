@@ -1,5 +1,6 @@
 ﻿namespace Mvk.Launcher.ViewModel;
 
-internal class MainWindowViewModel
+internal class MainWindowViewModel : BaseViewModel
 {
+	
 }
