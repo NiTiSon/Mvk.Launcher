@@ -20,12 +20,10 @@ public partial class MainWindow : Window
 		if (WindowState is WindowState.Maximized)
 		{
 			WindowState = WindowState.Normal;
-			root.Margin = new(0);
 		}
 		else
 		{
 			WindowState = WindowState.Maximized;
-			root.Margin = new(8);
 		}
 	}
 
@@ -38,18 +36,6 @@ public partial class MainWindow : Window
 	{
 		if (e.GetPosition(this).Y <= 35) // Header size, TODO?: Move to the theme values
 			DragMove();
-	}
-
-	private void Window_Loaded(object sender, RoutedEventArgs e)
-	{
-		WindowChrome.SetWindowChrome(this, new()
-		{
-			GlassFrameThickness = new(0),
-			CornerRadius = new(2, 2, 2, 2),
-			CaptionHeight = 0,
-			UseAeroCaptionButtons = false,
-			ResizeBorderThickness = new(6),
-		});
 	}
 
 	private void CloseButton_Click(object sender, RoutedEventArgs e)
