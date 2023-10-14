@@ -4,7 +4,8 @@
 		xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 		xmlns:local="clr-namespace:Mvk.Launcher"
-		Style="{StaticResource BorderlessWindow}"
+		xmlns:le="clr-namespace:Mvk.Launcher.Controls"
+		Style="{DynamicResource BorderlessWindow}"
 		mc:Ignorable="d"
 		WindowStartupLocation="CenterScreen"
 		WindowStyle="SingleBorderWindow"
@@ -23,17 +24,14 @@
 			</Grid.RowDefinitions>
 
 			<DockPanel HorizontalAlignment="Right">
-				<Button x:Name="MinimizeButton"
-					Content="{StaticResource Minimize}"
-					Style="{StaticResource HeaderButton}"
+				<le:HeaderButton x:Name="minimizeButton"
+					ImageSource="{DynamicResource MinimizeImage}"
 					Click="MinimizeButton_Click" />
-				<Button x:Name="ScaleButton"
-					Content="{StaticResource Maximize}"
-					Style="{StaticResource HeaderButton}"
+				<le:HeaderButton x:Name="scaleButton"
+					Style="{DynamicResource ScaleButton}"
 					Click="ScaleButton_Switch" />
-				<Button x:Name="CloseButton"
-					Content="{StaticResource Close}"
-					Style="{StaticResource HeaderCloseButton}"
+				<le:HeaderButton x:Name="closeButton"
+					Style="{DynamicResource CloseButton}"
 					Click="CloseButton_Click" />
 			</DockPanel>
 		</Grid>

@@ -1,0 +1,74 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+					xmlns:le="clr-namespace:Mvk.Launcher.Controls">
+
+	<Style TargetType="{x:Type le:HeaderButton}" x:Key="DefaultHeaderButtonStyle">
+		<Setter Property="Height" Value="35px" />
+		<Setter Property="Width" Value="25px" />
+		<Setter Property="Background" Value="Transparent" />
+		<Setter Property="HorizontalContentAlignment" Value="Center"/>
+		<Setter Property="VerticalContentAlignment" Value="Center"/>
+		<Setter Property="Padding" Value="7px"/>
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type le:HeaderButton}">
+					<Border x:Name="border"
+							Background="{TemplateBinding Background}"
+							BorderThickness="0"
+							SnapsToDevicePixels="True">
+						<Image x:Name="image" Margin="{TemplateBinding Padding}" Source="{TemplateBinding ImageSource}" />
+					</Border>
+					<ControlTemplate.Triggers>
+						<Trigger Property="IsMouseOver" Value="True">
+							<Setter Property="Background" Value="{DynamicResource HeaderButton.MouseOver.Background}" />
+						</Trigger>
+					</ControlTemplate.Triggers>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	<Style TargetType="{x:Type le:HeaderButton}" BasedOn="{StaticResource DefaultHeaderButtonStyle}" />
+
+	<Style TargetType="{x:Type le:HeaderButton}" x:Key="ScaleButton" BasedOn="{StaticResource DefaultHeaderButtonStyle}">
+		<Setter Property="Height" Value="35px" />
+		<Setter Property="Width" Value="25px" />
+		<Setter Property="Background" Value="Transparent" />
+		<Setter Property="HorizontalContentAlignment" Value="Center"/>
+		<Setter Property="VerticalContentAlignment" Value="Center"/>
+		<Setter Property="Padding" Value="7px"/>
+		<Setter Property="ImageSource" Value="{DynamicResource MaximizeImage}" />
+
+		<Style.Triggers>
+			<DataTrigger Binding="{Binding WindowState, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}" Value="Maximized">
+				<Setter Property="ImageSource" Value="{DynamicResource NormalizeImage}" />
+			</DataTrigger>
+		</Style.Triggers>
+	</Style>
+
+	<Style TargetType="{x:Type le:HeaderButton}" x:Key="CloseButton" BasedOn="{StaticResource DefaultHeaderButtonStyle}">
+		<Setter Property="Height" Value="35px" />
+		<Setter Property="Width" Value="25px" />
+		<Setter Property="Background" Value="Transparent" />
+		<Setter Property="HorizontalContentAlignment" Value="Center"/>
+		<Setter Property="VerticalContentAlignment" Value="Center"/>
+		<Setter Property="Padding" Value="7px"/>
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type le:HeaderButton}">
+					<Border x:Name="border"
+					Background="{TemplateBinding Background}"
+					BorderThickness="0"
+					SnapsToDevicePixels="True">
+						<Image x:Name="image" Margin="{TemplateBinding Padding}" Source="{DynamicResource CloseImage}" />
+					</Border>
+					<ControlTemplate.Triggers>
+						<Trigger Property="IsMouseOver" Value="True">
+							<Setter Property="Background" Value="{DynamicResource HeaderCloseButton.MouseOver.Background}" />
+						</Trigger>
+					</ControlTemplate.Triggers>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+</ResourceDictionary>

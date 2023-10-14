@@ -1,6 +1,4 @@
-﻿using System;
-using System.Windows;
-using System.Windows.Shell;
+﻿using System.Windows;
 
 namespace Mvk.Launcher;
 /// <summary>
@@ -8,4 +6,5 @@ namespace Mvk.Launcher;
 /// </summary>
 public partial class App : Application
 {
+	internal static double HeaderHeight = 35;
 }

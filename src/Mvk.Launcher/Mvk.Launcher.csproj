@@ -10,5 +10,9 @@
 	<ItemGroup>
 		<Resource Include="Resources\**" />
 	</ItemGroup>
+	
+	<ItemGroup>
+	  <Folder Include="Model\" />
+	</ItemGroup>
 
 </Project>
