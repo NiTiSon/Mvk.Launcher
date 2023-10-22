@@ -3,12 +3,12 @@
 					xmlns:le="clr-namespace:Mvk.Launcher.Controls">
 
 	<Style TargetType="{x:Type le:HeaderButton}" x:Key="DefaultHeaderButtonStyle">
-		<Setter Property="Height" Value="35px" />
-		<Setter Property="Width" Value="25px" />
+		<Setter Property="Height" Value="40px" />
+		<Setter Property="Width" Value="30px" />
 		<Setter Property="Background" Value="Transparent" />
 		<Setter Property="HorizontalContentAlignment" Value="Center"/>
 		<Setter Property="VerticalContentAlignment" Value="Center"/>
-		<Setter Property="Padding" Value="7px"/>
+		<Setter Property="Padding" Value="9px"/>
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="{x:Type le:HeaderButton}">
@@ -31,12 +31,6 @@
 	<Style TargetType="{x:Type le:HeaderButton}" BasedOn="{StaticResource DefaultHeaderButtonStyle}" />
 
 	<Style TargetType="{x:Type le:HeaderButton}" x:Key="ScaleButton" BasedOn="{StaticResource DefaultHeaderButtonStyle}">
-		<Setter Property="Height" Value="35px" />
-		<Setter Property="Width" Value="25px" />
-		<Setter Property="Background" Value="Transparent" />
-		<Setter Property="HorizontalContentAlignment" Value="Center"/>
-		<Setter Property="VerticalContentAlignment" Value="Center"/>
-		<Setter Property="Padding" Value="7px"/>
 		<Setter Property="ImageSource" Value="{DynamicResource MaximizeImage}" />
 
 		<Style.Triggers>
@@ -47,12 +41,6 @@
 	</Style>
 
 	<Style TargetType="{x:Type le:HeaderButton}" x:Key="CloseButton" BasedOn="{StaticResource DefaultHeaderButtonStyle}">
-		<Setter Property="Height" Value="35px" />
-		<Setter Property="Width" Value="25px" />
-		<Setter Property="Background" Value="Transparent" />
-		<Setter Property="HorizontalContentAlignment" Value="Center"/>
-		<Setter Property="VerticalContentAlignment" Value="Center"/>
-		<Setter Property="Padding" Value="7px"/>
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="{x:Type le:HeaderButton}">

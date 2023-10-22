@@ -1,0 +1,32 @@
+﻿<UserControl x:Class="Mvk.Launcher.Controls.GameInstanceCard"
+			 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+			 xmlns:local="clr-namespace:Mvk.Launcher.Controls"
+			 mc:Ignorable="d"
+			 d:DesignHeight="175" d:DesignWidth="140"
+			 Height="175" Width="140" Name="gameInstanceCard"
+			 MaxHeight="175" MaxWidth="140">
+	<Border Background="{DynamicResource UI}"
+			CornerRadius="14">
+		<StackPanel Margin="0">
+			<StackPanel.Resources>
+				<Style TargetType="{x:Type Label}">
+					<Setter Property="FontFamily" Value="Ubuntu" />
+					<Setter Property="Margin" Value="15,3,3,0" />
+					<Setter Property="Padding" Value="0" />
+				</Style>
+			</StackPanel.Resources>
+			<Border Width="110" Height="110"
+				Margin="11"
+				CornerRadius="14">
+				<Border.Background>
+					<ImageBrush Stretch="Fill" ImageSource="{Binding Path=Image,ElementName=gameInstanceCard}" />
+				</Border.Background>
+			</Border>
+			<Label FontWeight="Bold" Foreground="#B0BAC5" Content="%Profile_Title%" />
+			<Label Foreground="#78B0BAC5" Content="%Profile_Version%" />
+		</StackPanel>
+	</Border>
+</UserControl>

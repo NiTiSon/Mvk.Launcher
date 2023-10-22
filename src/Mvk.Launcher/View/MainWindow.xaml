@@ -11,7 +11,7 @@
 		WindowStyle="SingleBorderWindow"
 		MouseLeftButtonDown="Window_MouseLeftButtonDown"
 		MinHeight="450" MinWidth="700">
-	<Grid x:Name="root" Background="{StaticResource Background}">
+	<Grid x:Name="root" Background="{DynamicResource UI}">
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="65px" />
 			<ColumnDefinition Width="*" />
@@ -19,7 +19,7 @@
 
 		<Grid Grid.Column="1" >
 			<Grid.RowDefinitions>
-				<RowDefinition Height="35px" />
+				<RowDefinition Height="40px" />
 				<RowDefinition Height="*" />
 			</Grid.RowDefinitions>
 
@@ -34,6 +34,11 @@
 					Style="{DynamicResource CloseButton}"
 					Click="CloseButton_Click" />
 			</DockPanel>
+
+			<Border Grid.Row="1"
+				Background="{DynamicResource Background}"
+				CornerRadius="15,0,0,0">
+			</Border>
 		</Grid>
 	</Grid>
 </Window>

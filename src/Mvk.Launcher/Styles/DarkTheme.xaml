@@ -8,6 +8,7 @@
 
 	<Color x:Key="BackColor">#16181C</Color>
 	<Color x:Key="UIColor">#26292F</Color>
+	<Color x:Key="HightlightColor">#434853</Color>
 	<Color x:Key="UIAlarmColor">#F71111</Color>
 	<Color x:Key="PrimaryColor">#7943BE</Color>
 	<Color x:Key="SecondaryColor">#4A2578</Color>
@@ -20,11 +21,8 @@
 	<SolidColorBrush x:Key="Primary" Color="{StaticResource PrimaryColor}" />
 	<SolidColorBrush x:Key="Secondary" Color="{StaticResource SecondaryColor}" />
 
-	<SolidColorBrush x:Key="HeaderButton.Static.Background" Color="{StaticResource UIColor}"/>
-	<SolidColorBrush x:Key="HeaderButton.MouseOver.Background" Color="{StaticResource UIColor}"/>
+	<SolidColorBrush x:Key="HeaderButton.MouseOver.Background" Color="{StaticResource HightlightColor}" />
 	<SolidColorBrush x:Key="HeaderCloseButton.MouseOver.Background" Color="{StaticResource UIAlarmColor}" />
 	<SolidColorBrush x:Key="HeaderButton.Pressed.Background" Color="Transparent"/>
-	<SolidColorBrush x:Key="HeaderButton.Disabled.Background" Color="Transparent"/>
-	<SolidColorBrush x:Key="HeaderButton.Disabled.Foreground" Color="Transparent"/>
 
 </ResourceDictionary>
